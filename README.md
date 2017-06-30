@@ -28,37 +28,40 @@ FEATURES:
 		-allows user to input address or location. Shows list of shelters that are sortable by location, type, etc
 
 	-Resource/non-profit finder
-		**UI: Interactive map with list of services
-			-filter resources by:
+			**UI: Interactive map with list of services
+				-filter resources by:
 
-				service-type:
-					-housing resources
-					-food/meal resources
-					-essentials
-					-education resources
-					-safety 
-					-misc: counseling /legal advice/ 
+					service-type:
+						-housing resources
+						-food/meal resources
+						-essentials
+						-education resources
+						-safety 
+						-misc: counseling /legal advice/ 
 
-				location: 
-							
+					location: 
 
-
-			-community members can refer new organizations – 
-			-community members can rate organizations and provide comments and feedback
+				-community members can refer new organizations – 
+				-community members can rate organizations and provide comments and feedback
+				
 	-Community outreach
 	-Forum/community board
 				- members share and discuss community issues relating to poverty, housing, safety, and 
 				  any other community concerns.
+				  
 	-Safety map 
 		    -members can pin their location and post message stating if they are experiencing safety concerns.
 
-		     - users can mark their location and express safety concerns – the goal of this is to allow citizens to be 			     able to post safety concerns about citizens ( house-less or otherwise) without having to approach the 			     resident to see if they need help.  It will be essentially to provide a link for users to contact non-			     emergency services so they canalso report the  incident to the proper channels.
+		     - users can mark their location and express safety concerns – the goal of this is to allow citizens to be 			    	      able to post safety concerns about citizens ( house-less or otherwise) without having to approach the resident to 		      see if they need help.  It will be essentially to provide a link for users to contact non-emergency services so 			      they can also report the  incident to the proper channels.
 
 
 	-Connect members with non-emergency services 
 		-cheirs 
 		- Portland respond
 
+
+	-testmonies  
+	- about
 
 IMPLEMENTATION:
 
