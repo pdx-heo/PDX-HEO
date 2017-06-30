@@ -52,7 +52,7 @@ FEATURES:
 	-Safety map 
 		    -members can pin their location and post message stating if they are experiencing safety concerns.
 
-		     - users can mark their location and express safety concerns – the goal of this is to allow citizens to be 			    	      able to post safety concerns about citizens ( house-less or otherwise) without having to approach the resident to 		      see if they need help.  It will be essentially to provide a link for users to contact non-emergency services so 			      they can also report the  incident to the proper channels.
+		     - users can mark their location and express safety concerns – the goal of this is to allow citizens to be able to post safety concerns about citizens (house-less or otherwise) without having to approach the resident to see if they need help. It will be essentially to provide a message and a link to encourage users to contact emrgancy/non-emergency services so they can also report the incident to the proper channels.
 
 
 	-Connect members with non-emergency services 
