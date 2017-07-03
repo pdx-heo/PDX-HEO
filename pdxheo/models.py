@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+
+class Shelters(models.Model):
+    name = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+    address = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
+    hours = models.CharField(max_length=200)
