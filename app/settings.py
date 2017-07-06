@@ -25,13 +25,12 @@ SECRET_KEY = '$)*mhm-tzs@)xesra_1$*n2ty99-0w*6=^q3v8p-k)rn71o&^o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.99.100', 'localhost']
+ALLOWED_HOSTS = ['192.168.99.100', '127.0.0.1', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
     'pdxheo.apps.PdxheoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -107,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
