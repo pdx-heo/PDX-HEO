@@ -1,7 +1,7 @@
-{% if service_list %}
+{% if shelter_list %}
     <ul>
-    {% for service in service_list %}
-        <li><a href="{% url 'pdxheo:service' service.id %}">{{ service.name }}</a></li>
+    {% for shelter in shelter_list %}
+        <li><a href="{% url 'shelter' shelter.id %}">{{ shelter.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

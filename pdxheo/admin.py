@@ -1,9 +1,7 @@
 from django.contrib import admin
-from .models import ServiceType
 from .models import Organization
-from .models import Service
+from .models import Shelter
 
 
-admin.site.register(ServiceType)
 admin.site.register(Organization)
-admin.site.register(Service)
+admin.site.register(Shelter)

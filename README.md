@@ -85,5 +85,6 @@ MOTIVATION:
 
 TEAM MEMBER:
 
-Leading Contributer:
-	Mackenzie Wangenstein
+Leading Contributers:
+	- Mackenzie Wangenstein
+	- Andy Mayer

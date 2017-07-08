@@ -25,7 +25,7 @@ SECRET_KEY = '$)*mhm-tzs@)xesra_1$*n2ty99-0w*6=^q3v8p-k)rn71o&^o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.99.100', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,12 +74,28 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+# TODO: NOT SECURE!
+if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': '/cloudsql/pdx-heo:us-west1:pdx-heo-postgresql',
+            'NAME': 'pdxheo',
+            'USER': 'pdxheo',
+            'PASSWORD': 'password',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'pdxheo',
+            'USER': 'pdxheo',
+            'PASSWORD': 'password',
+            'HOST': '35.197.30.92',
+            'PORT': '',
+        }
+    }
 
 
 # Password validation
