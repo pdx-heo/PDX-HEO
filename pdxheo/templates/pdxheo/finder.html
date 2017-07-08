@@ -1,0 +1,11 @@
+<title>PDX Resource Finder</title>
+<p>Welcome to the shelter finder</p>
+{% if shelter_list %}
+    <ul>
+    {% for shelter in shelter_list %}
+        <li><a href="{% url 'shelter' shelter.id %}">{{ shelter.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No services are available.</p>
+{% endif %}
