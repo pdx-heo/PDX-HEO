@@ -22,17 +22,14 @@ def testimonies(request):
 def about(request):
     return render(request, 'pdxheo/about.html')
 
-
 def finder(request):
     shelter_list = Shelter.objects.order_by('name')[:10]
     context = {'shelter_list': shelter_list}
     return render(request, 'pdxheo/finder.html', context)
 
-
 def organization(request, organization_id):
     org = get_object_or_404(Organization, pk=organization_id)
     return render(request, 'pdxheo/organization.html', {'organization': org})
-
 
 def shelter(request, shelter_id):
     she = get_object_or_404(Shelter, pk=shelter_id)
