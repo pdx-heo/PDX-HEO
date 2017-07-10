@@ -1,11 +1,16 @@
-<title>PDX Resource Finder</title>
-<p>Welcome to the shelter finder</p>
-{% if shelter_list %}
+{% extends 'pdxheo/base.html' %}
+
+{% block title %}Shelter Finder{% endblock %}
+
+{% block content %}
+  <p>Welcome to the shelter finder</p>
+  {% if shelter_list %}
     <ul>
-    {% for shelter in shelter_list %}
+      {% for shelter in shelter_list %}
         <li><a href="{% url 'shelter' shelter.id %}">{{ shelter.name }}</a></li>
-    {% endfor %}
+      {% endfor %}
     </ul>
-{% else %}
+  {% else %}
     <p>No services are available.</p>
-{% endif %}
+  {% endif %}
+{% endblock %}

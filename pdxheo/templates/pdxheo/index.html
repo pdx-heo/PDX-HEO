@@ -1,36 +1,13 @@
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+{% extends 'pdxheo/base.html' %}
 
-  <title>PDX Resource Finder</title>
-  <meta name="description" content="HomePage">
-  <meta name="author" content="PDX-HEO">
+{% block title %}Home{% endblock %}
 
-<!--  <link rel="stylesheet" href="css/styles.css?v=1.0">-->
-
-  <!--[if lt IE 9]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
-  <![endif]-->
-</head>
-
-<body>
-  <nav>
-    <a href="finder.html">Resource Finder</a>
-    <a href="communityboard.html">Community Board</a>
-    <a href="testimonies.html">Testimonies</a>
-    <a href="safetymap.html">Safety Map</a>
-    <a href="about.html">About</a>
-  </nav>
-
+{% block content %}
   <p>
     <br>Welcome to the Portland Housing Emergency Outreach and Safety web app
     <br>
     <br>
     <b>Resource finder</b> is searchable list of shelters and Resources for those experiencing
     issues relating to homelessness or poverty in Portland, Oregon and surrounding portland areas.
-
-
   </p>
-<!--  <script src="js/scripts.js"></script>-->
-</body>
-</html>
+{% endblock %}
