@@ -1,18 +1,22 @@
 from rest_framework import serializers
 from pdxheo.models import Organization, Shelter
 
-class OrganizationSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField(required=False, allow_blank=True, max_length=200)
-    description = serializers.CharField(required=False, allow_blank=True, max_length=200)
-    address = serializers.CharField(required=False, allow_blank=True, max_length=200)
-    pub_date = serializers.DateTimeField()
-    hours_open = serializers.TimeField()
-    hours_close = serializers.TimeField()
+class OrganizationSerializer(serializers.ModelSerializer):
 
-    #alterntaive method to above would be to use:
-    #                           Meta:
-    #                             model = Organization
+    class  Meta:
+        model = Organization
+        fields = ('id','name', 'description', 'address', 'pub_date', 'hours_open', 'hours_close')
+
+    # alternative to serializers.modelSerializer.  replace serializers. modelSerializer with
+    #serializers.Serializer
+            # id = serializers.IntegerField(read_only=True)
+            # name = serializers.CharField(required=False, allow_blank=True, max_length=200)
+            # description = serializers.CharField(required=False, allow_blank=True, max_length=200)
+            # address = serializers.CharField(required=False, allow_blank=True, max_length=200)
+            # pub_date = serializers.DateTimeField()
+            # hours_open = serializers.TimeField()
+            # hours_close = serializers.TimeField()
+
 
     def create(self, validated_date):
          """

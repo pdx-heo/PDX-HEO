@@ -22,4 +22,13 @@ To begin:
               #render data into json
          content = JSONRenderer().render(serializer.data)
          content
+
+
+
+            ----------                      -----------
+              #to see fields of serializer
+
+              serializer = OrganizationSerializer()
+              print(repr(serializer))
+
 ```
