@@ -24,12 +24,10 @@ def testimonies(request):
 def about(request):
     return render(request, 'pdxheo/about.html')
 
-
 def finder(request):
     shelter_list = Shelter.objects.order_by('name')[:10]
     context = {'shelter_list': shelter_list}
     return render(request, 'pdxheo/finder.html', context)
-
 
 def organization(request, organization_id):
     #old version
@@ -77,7 +75,6 @@ def organization_list(request):
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
-
 
 
 def shelter(request, shelter_id):
