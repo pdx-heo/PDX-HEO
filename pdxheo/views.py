@@ -1,13 +1,13 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse,HttpResponseRedirect, JsonResponse, Http404
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
-from django.views.decorators.csrf import csrf_exempt
-
-#potentially remove
-from django.template import loader
+from django.http import Http404
+#HttpResponse,HttpResponseRedirect,
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from django.views import generic
-
+#remove?
+#from django.views.decorators.csrf import csrf_exempt
+#from django.template import loader
 from .models import Shelter
 from .models import Organization
 from .serializers import OrganizationSerializer
@@ -44,7 +44,8 @@ class OrganizationView(generic.DetailView):
   model = Organization
   template_name = 'pdxheo/organization.html'
 
-def organization(request, organization_id):
+@api_view(['GET','PUT','DELETE'])
+def organization(request, organization_id, formate=None):
     #old version
 
     #org = get_object_or_404(Organization, pk=organization_id)
@@ -55,42 +56,46 @@ def organization(request, organization_id):
     try:
         organization = Organization.objects.get(organization_id=organization_id)
     except Organization.DoesNotExist:
-        return HttpResponse(status=404)
-
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
         if request.method == 'GET':
             serializer = OrganizationSerializer(organization)
-            return JsonResponse(serializer.data)
+            return Response(serializer.data)
 
         elif request.method == 'PUT':
-             data = JSONParser().parse(request)
-             serializer = OrganizationSerializer(organization, data=data)
+             serializer = OrganizationSerializer(organization, data=request.data)
              if serializer.is_valid():
                 serializer.save()
-                return JsonResponse(serializer.data, status=201)
-             return JsonResponse(serializer.errors, status=400)
+                return Response(serializer.data)
+             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         elif request.method == 'DELETE':
             organization.delete()
-            return HttpResponse(status=204)
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-#@csrf_exempt
-def organization_list(request):
-
+# example: http://127.0.0.1:8000/organization.json  # JSON suffix
+# example http://127.0.0.1:8000/organization.api   # Browsable API suffi
+@api_view(['GET','POST'])
+def organization_list(request, format=None):
+    """
+    List all organizations or create a new organizatoin
+    """
     if request.method == 'GET':
-        print("test")
         organizations = Organization.objects.all()
         serializer = OrganizationSerializer(organizations, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = OrganizationSerializer(data=data)
+    #    data = JSONParser().parse(request)
+        serializer = OrganizationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+                    #return JsonResponse(serializer.data, status=201)
+            #    return JsonResponse(serializer.errors, status=400)
 
 
 class ShelterView(generic.DetailView):
