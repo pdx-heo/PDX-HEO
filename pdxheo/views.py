@@ -62,7 +62,7 @@ def organization(request, organization_id):
             serializer = OrganizationSerializer(organization)
             return JsonResponse(serializer.data)
 
-        elif request.method == 'PUT'
+        elif request.method == 'PUT':
              data = JSONParser().parse(request)
              serializer = OrganizationSerializer(organization, data=data)
              if serializer.is_valid():
@@ -72,18 +72,19 @@ def organization(request, organization_id):
 
         elif request.method == 'DELETE':
             organization.delete()
-            return HttpResponse(status=204
+            return HttpResponse(status=204)
 
 
-@csrf_exempt
+#@csrf_exempt
 def organization_list(request):
 
-    if request.method = 'GET':
+    if request.method == 'GET':
+        print("test")
         organizations = Organization.objects.all()
-        serializer = OrganizationSerializer(organizations many=True)
+        serializer = OrganizationSerializer(organizations, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-    elif request.method = 'POST':
+    elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = OrganizationSerializer(data=data)
         if serializer.is_valid():

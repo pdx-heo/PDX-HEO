@@ -12,6 +12,7 @@ urlpatterns = [
   url(r'^safety/', views.safetymap, name='Safety Map'),
   url(r'^testimonies/', views.testimonies, name='testimonies'),
   # ex: /pdxheo/organization/1/
+  url(r'^organization/$', views.organization_list),
   url(r'^organization/(?P<pk>[0-9]+)/$', views.OrganizationView.as_view(), name='organization'),
   # ex: /pdxheo/shelter/1/
   url(r'^shelter/(?P<pk>[0-9]+)/$', views.ShelterView.as_view(), name='shelter'),
