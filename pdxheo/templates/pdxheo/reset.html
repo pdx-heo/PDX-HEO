@@ -1,0 +1,10 @@
+{% extends 'pdxheo/base.html' %}
+
+{% block title %}Password Reset{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <input type="submit">
+  </form>
+{% endblock %}
