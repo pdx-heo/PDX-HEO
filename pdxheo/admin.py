@@ -22,7 +22,7 @@ class OrganizationAdmin(admin.ModelAdmin):
 class ShelterAdmin(admin.ModelAdmin):
   fieldsets = [
     ('Organization', {'fields': ['organization']}),
-    ('Shelter Details', {'fields': ['name', 'description', 'address', 'hours_open', 'hours_close']}),
+    ('Shelter Details', {'fields': ['name', 'description', 'address', 'phone', 'hours_open', 'hours_close']}),
     ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
   ]
 
