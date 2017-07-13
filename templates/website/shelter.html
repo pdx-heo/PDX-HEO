@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ shelter }}{% endblock %}
+
+{% block content %}
+  name: {{ shelter }} <br>
+  description: {{ shelter.description }} <br>
+  address: {{ shelter.address }} <br>
+  hours: {{ shelter.hours_open }} - {{ shelter.hours_close }} <br>
+{% endblock %}

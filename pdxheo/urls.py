@@ -1,22 +1,24 @@
-from django.conf.urls import url
-from rest_framework.urlpatterns import format_suffix_patterns
-from . import views
+"""pdxheo URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.11/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.conf.urls import url, include
+    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+"""
+from django.conf.urls import include, url
+from django.contrib import admin
 
 urlpatterns = [
-  # ex: /pdxheo/
-  url(r'^$', views.index, name='index'),
-  url(r'^about/', views.about, name='about'),
-  url(r'^communityboard/', views.communityboard, name='communityboard'),
-  url(r'^community/', views.communityboard, name='communityboard'),
-  url(r'^finder/', views.FinderView.as_view(), name='finder'),
-  url(r'^safetymap/', views.safetymap, name='safetymap'),
-  url(r'^safety/', views.safetymap, name='Safety Map'),
-  url(r'^testimonies/', views.testimonies, name='testimonies'),
-  # ex: /pdxheo/organization/1/
-  url(r'^organization/$', views.organization_list),
-  url(r'^organization/(?P<pk>[0-9]+)/$', views.OrganizationView.as_view(), name='organization'),
-  # ex: /pdxheo/shelter/1/
-  url(r'^shelter/(?P<pk>[0-9]+)/$', views.ShelterView.as_view(), name='shelter'),
+  url(r'^admin/', admin.site.urls),
+  url(r'^', include('website.urls')),
+  url(r'^user/', include('user.urls')),
+  url(r'^api/', include('api.urls')),
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
