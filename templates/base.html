@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ page_title }}">
+  <meta name="author" content="PDX-HEO">
+
+  <title>PDX-HEO | {% block title %}{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'website/style.css' %}"/>
+</head>
+<body>
+<header>
+  <h1><a href="/">PDX-HEO</a></h1>
+  <nav>
+    <a href="{% url 'finder' %}">Resource Finder</a> |
+    <a href="{% url 'community_board' %}">Community Board</a> |
+    <a href="{% url 'testimonies' %}">Testimonies</a> |
+    <a href="{% url 'safety_map' %}">Safety Map</a> |
+    <a href="{% url 'about' %}">About</a> |
+    {% if user.is_authenticated %}
+      <a href="/admin/">Admin</a> |
+      <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}">Login</a> |
+      <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+  </nav>
+</header>
+
+<hr>
+
+<main>
+  <div>
+    {% block content %}
+    {% endblock %}
+  </div>
+</main>
+
+<footer>
+  <div>
+    <p align="center">PDX-HEO</p>
+  </div>
+</footer>
+</body>
+</html>
