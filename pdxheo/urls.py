@@ -20,5 +20,5 @@ urlpatterns = [
   url(r'^admin/', admin.site.urls),
   url(r'^', include('website.urls')),
   url(r'^user/', include('user.urls')),
-  url(r'^api/', include('api.urls')),
+  url(r'^api/', include('website.api.urls')),
 ]
