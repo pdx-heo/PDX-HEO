@@ -1,9 +1,0 @@
-{% if service_list %}
-    <ul>
-    {% for service in service_list %}
-        <li><a href="{% url 'pdxheo:service' service.id %}">{{ service.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No services are available.</p>
-{% endif %}

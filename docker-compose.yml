@@ -13,3 +13,9 @@ web:
 #     - pg_data
 # pg_data:
 #   image: postgress_d
+
+# testserializer:
+#   build: .
+#   command: python manage.py shell
+#   volumes:
+#     - .:/app
