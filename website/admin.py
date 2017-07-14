@@ -12,6 +12,7 @@ class ShelterInline(admin.TabularInline):
 class OrganizationAdmin(admin.ModelAdmin):
   fieldsets = [
     ('Organization Details', {'fields': ['name', 'description', 'address', 'hours_open', 'hours_close']}),
+    ('Contact Details', {'fields': ['phone', 'website', 'email']}),
     ('Publish', {'fields': ['pub_date'], 'classes': ['collapse']}),
   ]
   inlines = [ShelterInline]
@@ -23,7 +24,8 @@ class OrganizationAdmin(admin.ModelAdmin):
 class ShelterAdmin(admin.ModelAdmin):
   fieldsets = [
     ('Organization', {'fields': ['organization']}),
-    ('Shelter Details', {'fields': ['name', 'description', 'address', 'phone', 'hours_open', 'hours_close']}),
+    ('Shelter Details', {'fields': ['name', 'description', 'address', 'hours_open', 'hours_close']}),
+    ('Contact Details', {'fields': ['phone', 'website', 'email']}),
     ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
   ]
 
