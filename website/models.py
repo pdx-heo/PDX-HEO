@@ -8,8 +8,12 @@ class Organization(models.Model):
   description = models.CharField(max_length=200)
   address = models.CharField(max_length=200)
   pub_date = models.DateTimeField('date published')
+ # pub_date = models.DateTimeField('date published', auto_now_add=True)
+ # updated_date = models.DateTimeField('date updated', auto_now=True)
   hours_open = models.TimeField('open time')
   hours_close = models.TimeField('close time')
+ # hours_open = models.TimeField('open time', blank=True)
+ # hours_close = models.TimeField('close time', blank=True)
 
   def __str__(self):
     return self.name
@@ -21,9 +25,9 @@ class Shelter(models.Model):
   address = models.CharField(max_length=200)
   phone = models.CharField(max_length=10)
   description = models.CharField(max_length=200)
-  hours_open = models.TimeField('open time')
-  hours_close = models.TimeField('close time')
-  pub_date = models.DateTimeField('date published')
+  hours_open = models.TimeField('open time', blank=True)
+  hours_close = models.TimeField('close time', blank=True)
+  pub_date = models.DateTimeField('date published', auto_now_add=True)
 
   def __str__(self):
     return self.name

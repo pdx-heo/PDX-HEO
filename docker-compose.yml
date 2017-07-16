@@ -5,14 +5,14 @@ web:
     - .:/app
   ports:
     - "8000:8000"
-#  links:
-#    - db
-#db:
-#  image: postgres
-#   volumes_from:
-#     - pg_data
-# pg_data:
-#   image: postgress_d
+
+
+# build_app:
+#   build: .
+#   volumes:
+#     - .:/app
+#   command: python manage.py startapp testimonies
+
 
 # testserializer:
 #   build: .
