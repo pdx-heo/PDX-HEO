@@ -7,7 +7,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
     model = Organization
     fields = ('id', 'name', 'description', 'address', 'pub_date', 'hours_open', 'hours_close')
 
-  def create(self, validated_date):
+  def create(self, validated_data):
     """
        Create and return a new `Organization` instance, given the validated data.
     """
@@ -33,7 +33,7 @@ class ShelterSerializer(serializers.ModelSerializer):
     model = Shelter
     fields = ('id', 'name', 'organization', 'description', 'address', 'pub_date', 'hours_open', 'hours_close')
 
-  def create(self, validated_date):
+  def create(self, validated_data):
     """
        Create and return a new `Organization` instance, given the validated data.
     """

@@ -18,7 +18,7 @@ class Organization(models.Model):
 
 class Shelter(models.Model):
   name = models.CharField(max_length=200)
-  organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+  organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, null=True)
   address = models.CharField(max_length=200)
   phone = models.CharField(max_length=10)
   description = models.CharField(max_length=200)
