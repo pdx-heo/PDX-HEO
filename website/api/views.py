@@ -1,5 +1,5 @@
 from website.models import Organization, Shelter
-from .serializers import OrganizationSerializer
+from .serializers import OrganizationSerializer, ShelterSerializer
 from rest_framework import generics
 
 class OrganizationDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -17,3 +17,18 @@ class OrganizationList(generics.ListCreateAPIView):
   """
   queryset = Organization.objects.all()
   serializer_class = OrganizationSerializer
+
+class ShelterDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+      Create get,post, put, delete organization
+    """
+    queryset = Shelter.objects.all()
+    serializer_class = ShelterSerializer
+
+
+class ShelterList(generics.ListCreateAPIView):
+    """
+    List all organizations or create a new organization
+    """
+    queryset = Shelter.objects.all()
+    serializer_class = ShelterSerializer

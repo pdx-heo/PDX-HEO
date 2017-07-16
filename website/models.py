@@ -25,7 +25,7 @@ class Shelter(models.Model):
   hours_open = models.TimeField('open time', blank=True, null=True)
   hours_close = models.TimeField('close time', blank=True, null=True)
   pub_date = models.DateTimeField('date published', auto_now_add=True)
-    updated_date = models.DateTimeField('date updated', auto_now=True)
+  updated_date = models.DateTimeField('date updated', auto_now=True)
 
   def __str__(self):
     return self.name
