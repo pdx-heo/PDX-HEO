@@ -12,7 +12,7 @@ class ShelterInline(admin.TabularInline):
 class OrganizationAdmin(admin.ModelAdmin):
   fieldsets = [
     ('Organization Details', {'fields': ['name', 'description', 'address', 'hours_open', 'hours_close']}),
-    ('Publish', {'fields': ['pub_date'], 'classes': ['collapse']}),
+#    ('Publish', {'fields': ['pub_date'], 'classes': ['collapse']}),
   ]
   inlines = [ShelterInline]
   list_display = ('name', 'address', 'pub_date')
