@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from website.models import Organization, Shelter
+from website.models import Organization, Service
 
 
 class OrganizationSerializer(serializers.ModelSerializer):
@@ -28,16 +28,16 @@ class OrganizationSerializer(serializers.ModelSerializer):
     return instance
 
 
-class ShelterSerializer(serializers.ModelSerializer):
+class ServiceSerializer(serializers.ModelSerializer):
   class Meta:
-    model = Shelter
+    model = Service
     fields = ('id', 'name', 'organization', 'description', 'address', 'pub_date', 'hours_open', 'hours_close')
 
   def create(self, validated_data):
     """
        Create and return a new `Organization` instance, given the validated data.
     """
-    return Shelter.objects.create(**validated_data)
+    return Service.objects.create(**validated_data)
 
   def update(self, instance, validated_data):
     """
