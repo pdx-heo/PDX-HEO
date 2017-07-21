@@ -3,8 +3,9 @@
 {% block title %}{{ service }}{% endblock %}
 
 {% block content %}
-  name: {{ service }} <br>
-  description: {{ service.description }} <br>
-  address: {{ service.address }} <br>
-  hours: {{ service.hours_open }} - {{ service.hours_close }} <br>
+  Name: {{ service }} <br>
+  Description: {{ service.description }} <br>
+  Address: {{ service.address }} <br>
+  Hours: {{ service.hours_open }} - {{ service.hours_close }} <br>
+  PhoneNumber: {{ shelter.phone }} <br>
 {% endblock %}
