@@ -31,6 +31,7 @@ class ServiceType(models.Model):
 class Service(models.Model):
   organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, null=True)
   type = models.ForeignKey(ServiceType, on_delete=models.CASCADE, blank=True, null=True)
+  creator = models.ForeignKey('auth.User', related_name='services', on_delete=models.CASCADE, blank=True, null=True)
   name = models.CharField(max_length=200)
   description = models.CharField(max_length=200)
   address = models.CharField(max_length=200)

@@ -1,7 +1,17 @@
 from website.models import Organization, Service
-from .serializers import OrganizationSerializer, ServiceSerializer
-from rest_framework import generics
+from .serializers import OrganizationSerializer, ServiceSerializer, UserSerializer
+from rest_framework import generics, permissions
 
+from django.contrib.auth.models import User #TODO - change to user in project when re-introduced
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class OrganizationDetail(generics.RetrieveUpdateDestroyAPIView):
   """
@@ -26,7 +36,7 @@ class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 class ServiceList(generics.ListCreateAPIView):
     """
@@ -34,3 +44,7 @@ class ServiceList(generics.ListCreateAPIView):
     """
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
+
+    def perform_create(self, serializer):
+        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+        serializer.save(creator=self.request.user)
