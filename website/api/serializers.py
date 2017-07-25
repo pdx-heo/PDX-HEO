@@ -56,7 +56,7 @@ class ServiceSerializer(serializers.ModelSerializer):
     instance.name = validated_data.get('name', instance.name)
     instance.organization = validated_data.get('organization', instance.organization)
     instance.description = validated_data.get('description', instance.description)
-    instance.creator = validated_data.get('creator', instance.creator)
+    #instance.creator = validated_data.get('creator', instance.creator)
     instance.address = validated_data.get('address', instance.address)
     instance.pub_date = validated_data.get('pub_date', instance.pub_date)
     instance.updated_date = validated_data.get('updated_date', instance.updated_date)

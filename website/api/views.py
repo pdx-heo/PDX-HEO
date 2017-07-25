@@ -1,5 +1,6 @@
 from website.models import Organization, Service
 from .serializers import OrganizationSerializer, ServiceSerializer, UserSerializer
+from .permissions import IsOwnerOrReadOnly
 from rest_framework import generics, permissions
 
 from django.contrib.auth.models import User #TODO - change to user in project when re-introduced
@@ -36,7 +37,7 @@ class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
 
 class ServiceList(generics.ListCreateAPIView):
     """
@@ -44,6 +45,7 @@ class ServiceList(generics.ListCreateAPIView):
     """
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
 
     def perform_create(self, serializer):
         permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
