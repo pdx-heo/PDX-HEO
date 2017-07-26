@@ -1,7 +1,8 @@
 from website.models import Organization, Service
 from .serializers import OrganizationSerializer, ServiceSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, viewsets
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse_lazy
@@ -14,14 +15,10 @@ def api_root(request, format=None):
     return Response({
         #'users': reverse('user-list', request=request, format=format),
         #TODO: follow page 6 and 7
-        'services': reverse_lazy('service-list', request=request, format=format)
+        'services': reverse_lazy('api:service-list', request=request, format=format)
     })
 
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class UserDetail(generics.RetrieveAPIView):
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
