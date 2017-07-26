@@ -15,46 +15,35 @@ def api_root(request, format=None):
     return Response({
         #'users': reverse('user-list', request=request, format=format),
         #TODO: follow page 6 and 7
-        'services': reverse_lazy('api:service-list', request=request, format=format)
+    #    'services': reverse_lazy('api:service-list', request=request, format=format)
     })
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class OrganizationDetail(generics.RetrieveUpdateDestroyAPIView):
+class OrganizationViewSet(viewsets.ModelViewSet):
   """
-    Create get,post, put, delete organization
-  """
-  queryset = Organization.objects.all()
-  serializer_class = OrganizationSerializer
-
-
-class OrganizationList(generics.ListCreateAPIView):
-
-  """
-  List all organizations or create a new organization
+  This viewset automatically provides `list`, `create`, `retrieve`,
+  `update` and `destroy` actions.
   """
   queryset = Organization.objects.all()
   serializer_class = OrganizationSerializer
+  permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+  def perform_create(self, serializer):
+      serializer.save(creator=self.request.user)
 
 
-class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-      Create get,post, put, delete organization
-    """
-    queryset = Service.objects.all()
-    serializer_class = ServiceSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
 
-class ServiceList(generics.ListCreateAPIView):
+class ServiceViewSet(viewsets.ModelViewSet):
     """
-    List all organizations or create a new organization
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
     """
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
 
     def perform_create(self, serializer):
-        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
         serializer.save(creator=self.request.user)

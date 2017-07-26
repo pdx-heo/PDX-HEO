@@ -5,6 +5,7 @@ from django.db import models
 # Organizations provide services
 class Organization(models.Model):
   name = models.CharField(max_length=200)
+  creator = models.ForeignKey('auth.User', related_name='organizations', on_delete=models.CASCADE, blank=True, null=True)
   description = models.CharField(max_length=200)
   address = models.CharField(max_length=200)
   phone = models.CharField(max_length=200, blank=True, null=True)
