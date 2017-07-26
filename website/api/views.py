@@ -2,9 +2,20 @@ from website.models import Organization, Service
 from .serializers import OrganizationSerializer, ServiceSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly
 from rest_framework import generics, permissions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse_lazy
 
 from django.contrib.auth.models import User #TODO - change to user in project when re-introduced
+import views
 
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        #'users': reverse('user-list', request=request, format=format),
+        #TODO: follow page 6 and 7
+        'services': reverse_lazy('service-list', request=request, format=format)
+    })
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
