@@ -13,9 +13,8 @@ import views
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
-        #'users': reverse('user-list', request=request, format=format),
-        #TODO: follow page 6 and 7
-    #    'services': reverse_lazy('api:service-list', request=request, format=format)
+        'services': reverse_lazy('api:service-list', request=request, format=format),
+        'organizations': reverse_lazy('api:organization-list', request=request, format=format)
     })
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):

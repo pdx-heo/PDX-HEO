@@ -8,12 +8,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'services', 'creator')
+        fields = ('id', 'username', 'services', 'organizations')
 
 class OrganizationSerializer(serializers.ModelSerializer):
   class Meta:
     model = Organization
-    owner = serializers.ReadOnlyField(source='creator.username')
+    creator = serializers.ReadOnlyField(source='creator.username')
     fields = ('id', 'name', 'description', 'address', 'pub_date', 'hours_open', 'hours_close', 'creator')
 
   def create(self, validated_data):
@@ -41,7 +41,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
 class ServiceSerializer(serializers.ModelSerializer):
   class Meta:
     model = Service
-    owner = serializers.ReadOnlyField(source='creator.username')
+    creator = serializers.ReadOnlyField(source='creator.username')
     fields = ('id', 'name', 'organization', 'description', 'address', 'pub_date', 'hours_open', 'hours_close', 'creator')
 
   def create(self, validated_data):
