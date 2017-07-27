@@ -88,12 +88,13 @@ ROOT_URLCONF = 'pdxheo.urls'
 #   },
 # ]
 
+#TODO: fix template error - follow https://django-machina.readthedocs.io/en/stable/getting_started.html#requirements
 from machina import MACHINA_MAIN_TEMPLATE_DIR
 TEMPLATES = [
   {
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
     'DIRS': (
-      [os.path.join(BASE_DIR, 'templates')],
+      os.path.join(BASE_DIR, 'templates'),
       MACHINA_MAIN_TEMPLATE_DIR,
     ),
     'OPTIONS': {
