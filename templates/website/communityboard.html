@@ -1,36 +1,90 @@
-{% extends "machina/forum/index.html" %}
+{% extends "machina/board_base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load forum_permission_tags %}
 
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/theme.css' %}" />
+{% endblock css %}
 
-{% block title %}Community Board{% endblock %}
-<html lang="en">
-<head>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{{ page_title }}">
-  <meta name="author" content="PDX-HEO">
-
-  {% load static %}
- <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
-</head>
-
-<body STYLE="background-color:lightgray">
-
-{% block header %}
-    <div class="pure-menu pure-menu-horizontal" style="background-color:lightseagreen">
-    <a href="/" class="pure-menu-heading pure-menu-link">PDX-HEO</a>
-    <ul class="pure-menu-list">
-        <li class="pure-menu-item"><a href="{% url 'finder' %}" class="pure-menu-link">Resource Finder</a></li>
-        <li class="pure-menu-item"><a href="{% url 'community_board' %}" class="pure-menu-link">Community Board</a></li>
-        <li class="pure-menu-item"><a href="{% url 'testimonies' %}" class="pure-menu-link">Testimonies</a></li>
-        <li class="pure-menu-item"><a href="{% url 'safety_map' %}" class="pure-menu-link">Safety Map</a></li>
-        <li class="pure-menu-item"><a href="{% url 'about' %}" class="pure-menu-link">About</a></li>
-    </ul>
+{% block body %}
+<div id="wrap">
+  <div class="navbar-fixed-top-spacing">&nbsp;</div>
+  <div class="navbar navbar-default navbar-fixed-top machina-navbar navbar-machina" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Machina Forum</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        {% if request.user.is_authenticated %}
+        <p class="navbar-text">{{ request.user.username }}</p>
+        {% endif %}
+        <ul class="nav navbar-nav navbar-right">
+        {% if request.user.is_authenticated %}
+          <li><a href="{% url 'forum_search:search' %}" data-toggle="tooltip" data-placement="bottom" title="{% trans 'Search' %}"><i class="fa fa-search"></i></a></li>
+          <li><a href="{% url 'forum_member:profile' request.user.id %}" data-toggle="tooltip" data-placement="bottom" title="{% trans 'Profile' %}"><i class="fa fa-user"></i></a></li>
+        {% else %}
+          <li><a href="{% url 'register' %}">{% trans "Sign up" %}</a></li>
+          <li><a href="{% url 'login' %}">{% trans "Sign in" %}</a></li>
+        {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container" id="main_container">
+    <div class="row">
+      <div class="col-xs-12">
+        {% block breadcrumb %}{% include "machina/partials/breadcrumb.html" %}{% endblock breadcrumb %}
+        <div class="pull-right controls-link-wrapper">
+        {% if not request.user.is_anonymous %}
+          <a href="{% url 'forum_member:user_subscriptions' %}" class="btn btn-link"><i class="fa fa-bookmark-o ">&nbsp;</i>{% trans "Subscriptions" %}</a>
+          <a href="{% url 'forum_member:user_posts' request.user.pk %}" class="btn btn-link"><i class="fa fa-comments-o ">&nbsp;</i>{% trans "View my messages" %}</a>
+        {% endif %}
+        {% get_permission 'can_access_moderation_queue' request.user as can_access_moderation_queue %}
+        {% if can_access_moderation_queue %}
+          <a href="{% url 'forum_moderation:queue' %}" class="btn btn-link"><i class="fa fa-gavel">&nbsp;</i>{% trans "Moderation queue" %}</a>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <br />
+        {% block messages %}{% include "machina/partials/messages.html" %}{% endblock messages %}
+      </div>
+    </div>
+    {% block content_wrapper %}
+    {% block content %}
+    {% endblock content %}
+    {% endblock content_wrapper %}
+  </div>
+  <div id="push"></div>
 </div>
-{% endblock %}
-</header>
-{% block content %}
-  <p>
-    <br>PDX Community Board
-  </p>
-{% endblock %}
+<footer id="footer">
+  <div class="container">
+    <div class="pull-right">
+      <p class="text-muted">
+        Powered by&nbsp;<a href="https://www.djangoproject.com/">django</a>&nbsp;and&nbsp;<a href="https://github.com/ellmetha/django-machina">django-machina</a>
+      </p>
+    </div>
+  </div>
+</footer>
+{% endblock body %}
+
+{% block js %}
+{{ block.super }}
+<script>
+  $(document).ready(function() {
+      $('a[data-toggle="tooltip"]').tooltip();
+  });
+</script>
+{% endblock js %}
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
