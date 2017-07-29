@@ -9,6 +9,7 @@
 
   <title>PDX-HEO | {% block title %}{% endblock %}</title>
   {% load static %}
+  {% load forum_tags %}
  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 </head>
 
@@ -20,7 +21,7 @@
     <a href="/" class="pure-menu-heading pure-menu-link">PDX-HEO</a>
     <ul class="pure-menu-list">
         <li class="pure-menu-item"><a href="{% url 'finder' %}" class="pure-menu-link">Resource Finder</a></li>
-        <li class="pure-menu-item"><a href="{% url 'community_board' %}" class="pure-menu-link">Community Board</a></li>
+        <li class="pure-menu-item"><a href="{% url 'forum:index' %}" class="pure-menu-link">Community Board</a></li>
         <li class="pure-menu-item"><a href="{% url 'testimonies' %}" class="pure-menu-link">Testimonies</a></li>
         <li class="pure-menu-item"><a href="{% url 'safety_map' %}" class="pure-menu-link">Safety Map</a></li>
         <li class="pure-menu-item"><a href="{% url 'about' %}" class="pure-menu-link">About</a></li>
