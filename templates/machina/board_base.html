@@ -7,54 +7,39 @@
 
 {% block css %}
 {{ block.super }}
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'css/machina.board_theme.vendor.min.css' %}" />
 <link rel="stylesheet" href="{% static 'css/machina.board_theme.min.css' %}" />
 {% endblock css %}
 
 {% block body %}
 {% block header %}
-<div class="navbar-fixed-top-spacing">&nbsp;</div>
-<div class="navbar navbar-default navbar-fixed-top machina-navbar" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">PDX-HEO</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      {% block header_collapse %}
-      <div class="col-sm-7 col-md-8 col-lg-5">
-        <form class="navbar-form form-inline" role="search" action="{% url 'forum_search:search' %}">
-          <div class="form-group col-sm-6 col-md-7">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="{% trans 'Search...' %}" name="q">
-              <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <a href="{% url 'forum_search:search' %}" class="btn btn-link">{% trans "Advanced search" %}</a>
-          </div>
-        </form>
-      </div>
-      {% endblock header_collapse %}
-    </div>
-  </div>
+<div class="pure-menu pure-menu-horizontal" style="background-color:lightseagreen">
+<a href="/" class="pure-menu-heading pure-menu-link">PDX-HEO</a>
+<ul class="pure-menu-list">
+    <li class="pure-menu-item"><a href="{% url 'finder' %}" class="pure-menu-link">Resource Finder</a></li>
+    <li class="pure-menu-item"><a href="{% url 'forum:index' %}" class="pure-menu-link">Community Board</a></li>
+    <li class="pure-menu-item"><a href="{% url 'testimonies' %}" class="pure-menu-link">Testimonies</a></li>
+    <li class="pure-menu-item"><a href="{% url 'safety_map' %}" class="pure-menu-link">Safety Map</a></li>
+    <li class="pure-menu-item"><a href="{% url 'about' %}" class="pure-menu-link">About</a></li>
+</ul>
 </div>
+
 {% endblock header %}
 <div class="container" id="main_container">
+
+
   <div class="row">
     <div class="col-xs-12">
       {% block breadcrumb %}{% include "partials/breadcrumb.html" %}{% endblock breadcrumb %}
+
       <div class="pull-right controls-link-wrapper">
       {% if not request.user.is_anonymous %}
+
         <a href="{% url 'forum_member:user_subscriptions' %}" class="btn btn-link"><i class="fa fa-bookmark-o ">&nbsp;</i>{% trans "Subscriptions" %}</a>
         <a href="{% url 'forum_member:user_posts' request.user.id %}" class="btn btn-link"><i class="fa fa-comments-o ">&nbsp;</i>{% trans "View my messages" %}</a>
+        <a href="{% url 'forum_search:search' %}" class="btn btn-link">{% trans "Advanced search" %}</a>
+
       {% endif %}
       {% get_permission 'can_access_moderation_queue' request.user as can_access_moderation_queue %}
       {% if can_access_moderation_queue %}
@@ -64,6 +49,17 @@
     </div>
   </div>
   <div class="row">
+    <form class="navbar-form form-inline" role="search" action="{% url 'forum_search:search' %}" style="align:right">
+          <div class="form-group col-sm-6 col-md-7">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="{% trans 'Search...' %}" name="q">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+
     <div class="col-xs-12">
       <br />
       {% block messages %}{% include "partials/messages.html" %}{% endblock messages %}
