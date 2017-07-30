@@ -5,5 +5,14 @@
 {% block content %}
   <p>
     <br>PDX Testimonies
+    <br>
+    <!-- send data to file located by call to url /testimonies/title-->
+    <form action="/testimonies/title/" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <label for="title"> Title: </label>
+      <input id="title" type="text" name="title" maxlength="150" required />
+      <input type="submit" value="submit">
+  </form>
   </p>
 {% endblock %}
