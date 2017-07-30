@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 
 from . import views
+#from . import api.views.ServiceView
 
 
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
   # ex: /pdxheo/shelter/1/
   url(r'^service/(?P<pk>[0-9]+)/$', views.ServiceView.as_view(), name='service'),
   url(r'^api/', include('website.api.urls', namespace="api")),
+  url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
