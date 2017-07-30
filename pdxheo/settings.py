@@ -154,12 +154,27 @@ WSGI_APPLICATION = 'pdxheo.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 # TODO: NOT SECURE!
-DATABASES = {
+if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+  DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+      'ENGINE': 'django.db.backends.postgresql_psycopg2',
+      'HOST': '/cloudsql/pdx-heo:us-west1:pdx-heo-postgresql',
+      'NAME': 'pdxheo',
+      'USER': 'pdxheo',
+      'PASSWORD': 'password',
     }
-}
+  }
+else:
+  DATABASES = {
+    'default': {
+      'ENGINE': 'django.db.backends.postgresql_psycopg2',
+      'NAME': 'pdxheo',
+      'USER': 'pdxheo',
+      'PASSWORD': 'password',
+      'HOST': '35.197.30.92',
+      'PORT': '',
+    }
+  }
 
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10
