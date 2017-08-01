@@ -1,11 +1,20 @@
 from rest_framework import serializers
 from website.models import Organization, Service
+from django.contrib.auth.models import User
 
+#later change model to point to user model once it gets re-introduced
+class UserSerializer(serializers.ModelSerializer):
+    services = serializers.PrimaryKeyRelatedField(many=True, queryset=Service.objects.all())
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'services', 'organizations')
 
 class OrganizationSerializer(serializers.ModelSerializer):
   class Meta:
     model = Organization
-    fields = ('id', 'name', 'description', 'address', 'pub_date', 'hours_open', 'hours_close')
+    creator = serializers.ReadOnlyField(source='creator.username')
+    fields = ('id', 'name', 'description', 'address', 'pub_date', 'hours_open', 'hours_close', 'creator')
 
   def create(self, validated_data):
     """
@@ -28,10 +37,12 @@ class OrganizationSerializer(serializers.ModelSerializer):
     return instance
 
 
+
 class ServiceSerializer(serializers.ModelSerializer):
   class Meta:
     model = Service
-    fields = ('id', 'name', 'organization', 'description', 'address', 'pub_date', 'hours_open', 'hours_close')
+    creator = serializers.ReadOnlyField(source='creator.username')
+    fields = ('id', 'name', 'organization', 'description', 'address', 'pub_date', 'hours_open', 'hours_close', 'creator')
 
   def create(self, validated_data):
     """

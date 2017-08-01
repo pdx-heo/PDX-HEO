@@ -14,6 +14,7 @@ class Testimony(models.Model):
 # Organizations provide services
 class Organization(models.Model):
   name = models.CharField(max_length=200)
+  creator = models.ForeignKey('auth.User', related_name='organizations', on_delete=models.CASCADE, blank=True, null=True)
   description = models.CharField(max_length=200)
   address = models.CharField(max_length=200)
   phone = models.CharField(max_length=200, blank=True, null=True)
@@ -40,6 +41,7 @@ class ServiceType(models.Model):
 class Service(models.Model):
   organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, null=True)
   type = models.ForeignKey(ServiceType, on_delete=models.CASCADE, blank=True, null=True)
+  creator = models.ForeignKey('auth.User', related_name='services', on_delete=models.CASCADE, blank=True, null=True)
   name = models.CharField(max_length=200)
   description = models.CharField(max_length=200)
   address = models.CharField(max_length=200)
