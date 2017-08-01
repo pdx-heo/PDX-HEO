@@ -1,6 +1,15 @@
 from django.db import models
 
 
+
+class Testimony(models.Model):
+    title = models.CharField(max_length=150)
+    story = models.TextField()
+    author = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+      return self.name
+
 # Create your models here.
 # Organizations provide services
 class Organization(models.Model):
