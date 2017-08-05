@@ -4,11 +4,12 @@ from django.db import models
 
 class Testimony(models.Model):
     title = models.CharField(max_length=150)
+    creator = models.ForeignKey('auth.User', related_name='testimonials', on_delete=models.CASCADE, blank=True, null=True)
     story = models.TextField()
     author = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-      return self.name
+      return self.title
 
 # Create your models here.
 # Organizations provide services

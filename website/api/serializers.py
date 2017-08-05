@@ -1,14 +1,42 @@
 from rest_framework import serializers
-from website.models import Organization, Service
+from website.models import Organization, Service, Testimony
 from django.contrib.auth.models import User
 
 #later change model to point to user model once it gets re-introduced
+
+
+
 class UserSerializer(serializers.ModelSerializer):
     services = serializers.PrimaryKeyRelatedField(many=True, queryset=Service.objects.all())
 
     class Meta:
         model = User
         fields = ('id', 'username', 'services', 'organizations')
+
+class TestimonySerializer(serializers.ModelSerializer):
+    model = Testimony
+    creator = serializers.ReadOnlyField(source='creator.username')
+    class Meta:
+        model = Testimony
+        fields = ('id', 'title', 'story', 'author', 'creator')
+
+    def create(self, validated_data):
+      """
+         Create and return a new `Organization` instance, given the validated data.
+      """
+      return Testimony.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+      """
+          update and return an existing `Organization` instance, given the validated data.
+      """
+      instance.title = validated_data.get('title', instance.title)
+      instance.story = validated_data.get('story', instance.story)
+      instance.author = validated_data.get('author', instance.author)
+      instance.save()
+      return instance
+
+
 
 class OrganizationSerializer(serializers.ModelSerializer):
   class Meta:

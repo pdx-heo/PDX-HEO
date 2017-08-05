@@ -16,6 +16,19 @@ service_detail = views.ServiceViewSet.as_view({
     'delete': 'destroy'
 
 })
+
+testimonials_list = views.TestimonyViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+
+Testimony_detail = views.TestimonyViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+
+})
 #
 organization_list = views.OrganizationViewSet.as_view({
 'get': 'list',
@@ -47,6 +60,9 @@ urlpatterns = [
   url(r'^organization/(?P<pk>[0-9]+)/$', organization_detail, name='organization'),
   url(r'^service/$', service_list, name='service-list'),
   url(r'^service/(?P<pk>[0-9]+)/$', service_detail, name='service'),
+  url(r'^testimonials/$', testimonials_list, name='testimonials-list'),
+  url(r'^testimonials/(?P<pk>[0-9]+)/$', Testimony_detail, name='testimony'),
+
 ]
 
 #
