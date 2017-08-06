@@ -23,10 +23,10 @@ class TestimonyForm(ModelForm):
 
 
 #creating a form to add a testimony
-form = TestimonyForm()
+#form = TestimonyForm()
 
 #creating a form to chang an existinng testimony
-testimony = Testimony.objects.get(pk=1)
-form = TestimonyForm(instance=testimony)
+#testimony = Testimony.objects.get(pk=2)
+# form = TestimonyForm(instance=testimony)
 
 #class TestimonySerializer(FormSer)

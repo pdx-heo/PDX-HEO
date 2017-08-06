@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import TestimonyForm
 from django.shortcuts import get_object_or_404
-#
+from django.http import HttpResponseForbidden, HttpResponseServerError, HttpResponseRedirect
+
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-#
+from .mixins import LoginRequiredMixin
+
 from django.urls import reverse_lazy
 from .models import Testimony
 
@@ -14,50 +16,55 @@ class TestimonyDetail(DetailView):
         generic class based detail view for Testimony
     """
     model = Testimony
-    def form_valid(self, form):
-        form.instance.creator = self.request.user
-        return super(TestimonyDetail, self).form_valid(form)
+    # def form_valid(self, form):
+    #     form.instance.creator = self.request.user
+    #     self.object = form.save(commit=False)
+    #
+    #     return super(TestimonyDetail, self).form_valid(form)
 
 class TestimonyCreate(CreateView):
     model = Testimony
-    fields = ['author', 'story', 'author']
+    fields = ['title','story','author']
+
     def form_valid(self, form):
+
+        if not self.request.user.is_authenticated():
+            return HttpResponseForbidden(u'You must be signed in to create a testimony.')
+
+
+        self.object = form.save(commit=False)
         form.instance.creator = self.request.user
+        self.object.save()
         return super(TestimonyCreate, self).form_valid(form)
 
-class TestimonyUpdate(UpdateView):
+class TestimonyUpdate(LoginRequiredMixin, UpdateView):
     model = Testimony
-    fields = ['author', 'story', 'author']
+    fields = ['title','story','author']
+
+    def dispatch(self, request, *args, **kwargs):
+        handler = super(TestimonyUpdate, self).dispatch(request, *args, **kwargs)
+        # Only allow editing if current user is owner
+        if self.object.creator != request.user:
+            return HttpResponseForbidden(u'You are not authorized to edit this Testimony.')
+        return handler
+
     def form_valid(self, form):
         form.instance.creator = self.request.user
         return super(TestimonyUpdate, self).form_valid(form)
+
+
 
 
 class TestimonyDelete(DeleteView):
     model = Testimony
     success_url = reverse_lazy('thanks')
 
+    def dispatch(self, request, *args, **kwargs):
+        handler = super(TestimonyDelete, self).dispatch(request, *args, **kwargs)
+        # Only allow editing if current user is owner
+        if self.object.creator != request.user:
+            return HttpResponseForbidden(u'You are not authorized to delete this Testimony.')
+        return handler
+
 def get_thanks(request):
     return render(request, 'website/thanks.html')
-
-#to do -- follow form set https://docs.djangoproject.com/en/1.11/topics/forms/modelforms/
-def get_testimony(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = TestimonyForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # testimony_inst = Testimony.objects.get(pk)
-            # testimony_inst.title = form.cleaned_data['title']
-            # testimony_inst.story = form.cleaned_data['story']
-            # testimony_inst.author = form.cleaned_data['author']
-            # testimony_inst.save()
-
-            #redirect to new url
-            return HttpResponseRedirect('/thanks/')
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = TestimonyForm()
-
-    return render(request, 'website/testimonials.html', {'form': form})
