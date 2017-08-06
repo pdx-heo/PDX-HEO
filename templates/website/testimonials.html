@@ -4,6 +4,17 @@
 {% block content %}
   <p>
     <br><h1><center>PDX testimonials</center></h1></br>
+    <br>
+    {% if testimonials %}
+      <ul>
+        {% for testimony in testimonials %}
+        <li><a href="{% url 'testimonials_detail' testimony.id %}">{{ testimony.title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <strong>There are no testimonials present.</strong>
+    {% endif %}
+
 
     <br>
     <a class="pure-button" a href="{% url 'testimony_create' %}">Add<br>Story<br> +</a>
