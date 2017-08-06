@@ -65,8 +65,6 @@ class ServiceSerializer(serializers.ModelSerializer):
     instance.save()
     return instance
 
-
-
 class TestimonySerializer(serializers.ModelSerializer):
   class Meta:
     model = Testimony

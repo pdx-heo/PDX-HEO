@@ -3,15 +3,12 @@
 {% block title %}testimonials{% endblock %}
 {% block content %}
   <p>
-    <br>PDX testimonials
+    <br><h1><center>PDX testimonials</center></h1></br>
+
     <br>
-    <form action="/testimonials/create" method="post">
-      {% csrf_token %}
-      <table>
-      {{ form }}
-    </table>
-     <input type="submit" value="Add Testimony">
-  </form>
+    <a class="pure-button" a href="{% url 'testimony_create' %}">Add<br>Story<br> +</a>
+
+
 
   </p>
 {% endblock %}

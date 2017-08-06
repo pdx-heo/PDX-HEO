@@ -30,6 +30,19 @@ service_detail = views.ServiceViewSet.as_view({
     'delete': 'destroy'
 
 })
+
+testimonials_list = views.TestimonyViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+
+Testimony_detail = views.TestimonyViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+
+})
 #
 organization_list = views.OrganizationViewSet.as_view({
 'get': 'list',

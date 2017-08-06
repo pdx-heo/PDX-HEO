@@ -34,6 +34,17 @@ class OrganizationViewSet(viewsets.ModelViewSet):
   def perform_create(self, serializer):
       serializer.save(creator=self.request.user)
 
+class TestimonyViewSet(viewsets.ModelViewSet):
+  """
+  This viewset automatically provides `list`, `create`, `retrieve`,
+  `update` and `destroy` actions.
+  """
+  queryset = Testimony.objects.all()
+  serializer_class = TestimonySerializer
+  permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+  def perform_create(self, serializer):
+      serializer.save(creator=self.request.user)
 
 
 class ServiceViewSet(viewsets.ModelViewSet):
