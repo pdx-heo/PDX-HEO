@@ -22,16 +22,17 @@ class TestimonyDetail(DetailView):
     #
     #     return super(TestimonyDetail, self).form_valid(form)
 
+
+
+
 class TestimonyCreate(CreateView):
     model = Testimony
-    fields = ['title','story','author']
+    fields = ['title','story','author', 'image']
 
     def form_valid(self, form):
 
         if not self.request.user.is_authenticated():
             return HttpResponseForbidden(u'You must be signed in to create a testimony.')
-
-
         self.object = form.save(commit=False)
         form.instance.creator = self.request.user
         self.object.save()

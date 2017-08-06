@@ -8,6 +8,10 @@ class Testimony(models.Model):
     creator = models.ForeignKey('auth.User', related_name='testimonials', on_delete=models.CASCADE, blank=True, null=True)
     story = models.TextField()
     author = models.CharField(max_length=100, blank=True, null=True)
+    image = models.ImageField(upload_to='documents/')
+
+
+
 
 
     def __str__(self):
