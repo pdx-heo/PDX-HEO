@@ -1,14 +1,25 @@
 from django.db import models
+from django.urls import reverse
 
 
 
 class Testimony(models.Model):
     title = models.CharField(max_length=150)
+    creator = models.ForeignKey('auth.User', related_name='testimonials', on_delete=models.CASCADE, blank=True, null=True)
     story = models.TextField()
     author = models.CharField(max_length=100, blank=True, null=True)
 
+
     def __str__(self):
-      return self.name
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('testimonials_detail', kwargs={'pk': self.pk})
+
+    class Meta:
+        verbose_name_plural = "testimonials"
+
+
 
 # Create your models here.
 # Organizations provide services

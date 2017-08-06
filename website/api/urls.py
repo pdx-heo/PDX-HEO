@@ -4,6 +4,20 @@ from django.conf.urls import include
 
 from . import views
 
+
+testimonials_list = views.TestimonyViewSet.as_view({
+    'get':'list',
+    'post': 'create'
+})
+
+
+testimonials_detail = views.TestimonyViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+
 service_list = views.ServiceViewSet.as_view({
     'get': 'list',
     'post': 'create'
@@ -47,6 +61,8 @@ urlpatterns = [
   url(r'^organization/(?P<pk>[0-9]+)/$', organization_detail, name='organization'),
   url(r'^service/$', service_list, name='service-list'),
   url(r'^service/(?P<pk>[0-9]+)/$', service_detail, name='service'),
+  url(r'^Testimony/$', testimonials_list, name='testimonials_list'),
+  url(r'^Testimony/(?P<pk>[0-9]+)/', testimonials_detail, name='testimony'),
 ]
 
 #

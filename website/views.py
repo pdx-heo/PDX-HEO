@@ -20,8 +20,8 @@ def communityboard(request):
   return render(request, 'website/communityboard.html')
 
 
-def testimonies(request):
-  return render(request, 'website/testimonies.html')
+def testimonials(request):
+  return render(request, 'website/testimonials.html')
 
 
 def about(request):

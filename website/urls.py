@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 
 from . import views
-from . import testimonies_views
+from . import testimonials_views
 
 urlpatterns = [
   # ex: /pdxheo/
@@ -10,9 +10,12 @@ urlpatterns = [
   url(r'^community/$', views.communityboard, name='community_board'),
   url(r'^finder/$', views.FinderView.as_view(), name='finder'),
   url(r'^safety/$', views.safetymap, name='safety_map'),
-  url(r'^testimonies/$', views.testimonies, name='testimonies'),
-  url(r'^testimonies/form', testimonies_views.get_testimony, name='testimonies_form'),
-  url(r'^thanks',testimonies_views.get_thanks, name='thanks'),
+  url(r'^testimonials/$', views.testimonials, name='testimonials'),
+  url(r'^testimonials/(?P<pk>\d+)$', testimonials_views.TestimonyDetail.as_view(), name='testimonials_detail'),
+  url(r'^testimonials/create', testimonials_views.TestimonyCreate.as_view(), name='testimony_create'),
+  url(r'^testimonials/(?P<pk>\d+)/update/$', testimonials_views.TestimonyUpdate.as_view(), name='testimony_update'),
+  url(r'^testimonials/(?P<pk>\d+)/delete/$', testimonials_views.TestimonyDelete.as_view(), name='testimony_delete'),
+  url(r'^thanks', testimonials_views.get_thanks, name='thanks'),
   # ex: /pdxheo/organization/1/
   url(r'^organization/(?P<pk>[0-9]+)/$', views.OrganizationView.as_view(), name='organization'),
   # ex: /pdxheo/shelter/1/
