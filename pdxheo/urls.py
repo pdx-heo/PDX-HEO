@@ -22,7 +22,4 @@ urlpatterns = ([
   url(r'^admin/', admin.site.urls),
   url(r'^', include('website.urls')),
   url(r'^forum/', include(board.urls)),
-]
-#apps
-
-)
+])

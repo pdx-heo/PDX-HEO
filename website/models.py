@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 # Create your models here.
@@ -46,3 +47,6 @@ class Service(models.Model):
 
   def __str__(self):
     return self.name
+
+  def get_absolute_url(self):
+    return reverse('service_detail', args=[self.pk])
