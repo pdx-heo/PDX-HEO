@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-
-
 {% block title %}Service Finder{% endblock %}
 
 {% block content %}
@@ -10,21 +8,14 @@
     <div class="pure-u-1-5"></div>
     <div class="pure-u-1-5">
       <div class="pure-button-group" role="group">
-        <!-- TODO: active and primary change based on which is selected -->
-        <button id="services_button" onclick="filterOutOrganizations()" style="width: 50%"
-                class="pure-button">Services
-        </button>
-        <button id="organizations_button" onclick="filterOutServices()" style="width: 50%" class="pure-button">
-          Organizations
-        </button>
+        <button id="services_button" onclick="serviceSearch()" style="width: 50%" class="pure-button">Services</button>
+        <button id="organizations_button" onclick="organizationSearch()" style="width: 50%" class="pure-button">Organizations</button>
       </div>
     </div>
     <div class="pure-u-1-5"></div>
     <div class="pure-u-1-5">
-      <form class="pure-form">
-        <input type="text" class="pure-input-2-3 pure-input-rounded" placeholder="Search...">
-        <button type="submit" class="pure-button">Search</button>
-      </form>
+      <input id="search_field" class="pure-input-2-3 pure-input-rounded" placeholder="Search...">
+      <button id="search_button" onclick="search()" class="pure-button">Search</button>
     </div>
 
     <div class="pure-u-1-5"></div>
@@ -35,10 +26,11 @@
       <div class="pure-button-group" role="group">
         <!-- TODO: only displays when Services is selected -->
         <!-- TODO: active and primary change based on which is selected -->
-        <button id="all_button" style="width: 25%" class="pure-button pure-button-active pure-button-primary">All</button>
-        <button id="shelters_button" style="width: 25%" class="pure-button">Shelters</button>
-        <button id="food_button" style="width: 25%" class="pure-button">Food</button>
-        <button id="healthcare_button" style="width: 25%" class="pure-button">Healthcare</button>
+        <button id="all_button" onclick="allSearch()" style="width: 25%" class="pure-button">All</button>
+        <button id="shelters_button" onclick="shelterSearch()" style="width: 25%" class="pure-button">Shelters</button>
+        <button id="food_button" onclick="foodSearch()" style="width: 25%" class="pure-button">Food</button>
+        <button id="health_button" onclick="healthSearch()" style="width: 25%" class="pure-button">Health
+        </button>
       </div>
     </div>
     <div class="pure-u-1-5"></div>
@@ -47,7 +39,7 @@
     <div class="pure-u-1-5"></div>
     <div class="pure-u-3-5">
       <!-- TODO: Change between organization and service -->
-      <table id="finder_table" class="pure-table pure-table-bordered">
+      <table id="finder_table" style="width: 100%" class="pure-table pure-table-bordered">
         <thead>
         <tr>
           <th>Name</th>
