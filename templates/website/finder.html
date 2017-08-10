@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+
+
 {% block title %}Service Finder{% endblock %}
 
 {% block content %}
@@ -9,8 +11,12 @@
     <div class="pure-u-1-5">
       <div class="pure-button-group" role="group">
         <!-- TODO: active and primary change based on which is selected -->
-        <button style="width: 50%" class="pure-button pure-button-active pure-button-primary">Services</button>
-        <button style="width: 50%" class="pure-button">Organizations</button>
+        <button id="services_button" onclick="filterOutOrganizations()" style="width: 50%"
+                class="pure-button">Services
+        </button>
+        <button id="organizations_button" onclick="filterOutServices()" style="width: 50%" class="pure-button">
+          Organizations
+        </button>
       </div>
     </div>
     <div class="pure-u-1-5"></div>
@@ -29,9 +35,10 @@
       <div class="pure-button-group" role="group">
         <!-- TODO: only displays when Services is selected -->
         <!-- TODO: active and primary change based on which is selected -->
-        <button style="width: 33.3%" class="pure-button pure-button-active pure-button-primary">Shelters</button>
-        <button style="width: 33.3%" class="pure-button">Food</button>
-        <button style="width: 33.3%" class="pure-button">Healthcare</button>
+        <button id="all_button" style="width: 25%" class="pure-button pure-button-active pure-button-primary">All</button>
+        <button id="shelters_button" style="width: 25%" class="pure-button">Shelters</button>
+        <button id="food_button" style="width: 25%" class="pure-button">Food</button>
+        <button id="healthcare_button" style="width: 25%" class="pure-button">Healthcare</button>
       </div>
     </div>
     <div class="pure-u-1-5"></div>
@@ -40,7 +47,7 @@
     <div class="pure-u-1-5"></div>
     <div class="pure-u-3-5">
       <!-- TODO: Change between organization and service -->
-      <table class="pure-table pure-table-bordered">
+      <table id="finder_table" class="pure-table pure-table-bordered">
         <thead>
         <tr>
           <th>Name</th>
@@ -66,6 +73,19 @@
             </tr>
           {% endfor %}
         {% endif %}
+        {% if organizations %}
+          {% for organization in organizations %}
+            <tr>
+              <td><a href="{{ organization.get_absolute_url }}">{{ organization.name }}</a></td>
+              <td>Organization</td>
+              <td>{{ organization.address }}</td>
+              <td><p>{{ organization.phone }}</p>
+                <p>{{ organization.email }}</p></td>
+              <td>{{ organization.description }}</td>
+              <td></td>
+            </tr>
+          {% endfor %}
+        {% endif %}
         </tbody>
       </table>
     </div>
@@ -78,4 +98,6 @@
     </div>
     <div class="pure-u-1-5"></div>
   </div>
+  {% load static %}
+  <script src="{% static 'website/finder.js' %}"></script>
 {% endblock %}
