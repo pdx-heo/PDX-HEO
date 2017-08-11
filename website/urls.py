@@ -2,6 +2,8 @@ from django.conf.urls import url, include
 
 from . import views
 from . import testimonials_views
+from django.conf import settings
+#from django.conf import django.views
 
 urlpatterns = [
   # ex: /pdxheo/

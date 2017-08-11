@@ -7,7 +7,6 @@ from django.http import HttpResponseForbidden, HttpResponseServerError, HttpResp
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .mixins import LoginRequiredMixin
-
 from django.urls import reverse_lazy
 from .models import Testimony
 
@@ -16,14 +15,6 @@ class TestimonyDetail(DetailView):
         generic class based detail view for Testimony
     """
     model = Testimony
-    # def form_valid(self, form):
-    #     form.instance.creator = self.request.user
-    #     self.object = form.save(commit=False)
-    #
-    #     return super(TestimonyDetail, self).form_valid(form)
-
-
-
 
 class TestimonyCreate(CreateView):
     model = Testimony
@@ -35,6 +26,8 @@ class TestimonyCreate(CreateView):
             return HttpResponseForbidden(u'You must be signed in to create a testimony.')
         self.object = form.save(commit=False)
         form.instance.creator = self.request.user
+    #if form.data['image']:
+
         self.object.save()
         return super(TestimonyCreate, self).form_valid(form)
 
@@ -52,9 +45,6 @@ class TestimonyUpdate(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.creator = self.request.user
         return super(TestimonyUpdate, self).form_valid(form)
-
-
-
 
 class TestimonyDelete(DeleteView):
     model = Testimony

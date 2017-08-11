@@ -18,17 +18,6 @@ def api_root(request, format=None):
         'testimonials': reverse_lazy('api:testimonials_list', request=request, format=format)
     })
 
-def model_form_upload(request):
-    if request.method == 'POST':
-        form = TestimonyForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('thanks')
-    else:
-        form = TestimonyForm()
-    return render(request, 'core/model_form_upload.html', {
-        'form': form
-    })
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):

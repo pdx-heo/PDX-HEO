@@ -3,7 +3,6 @@ from django.forms import ModelForm
 from .models import Testimony
 from rest_framework import serializers
 
-
 class TestimonyForm(ModelForm):
     def clean_title(self):
         data = self.cleaned_data['title']
@@ -15,6 +14,10 @@ class TestimonyForm(ModelForm):
 
     def clean_author(self):
         data = self.cleaned_data['author']
+        return data;
+
+    def clean_image(self):
+        data = self.cleaned_data['image']
         return data;
 
     class Meta:
