@@ -26,3 +26,9 @@ nav a {
 #testimonies-list li{
   display: inline;
 }
+
+.testimonies-button a{
+  background: red;
+  height: 100px;
+  width: 200px;
+}
