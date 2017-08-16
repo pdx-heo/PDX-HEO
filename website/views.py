@@ -4,6 +4,7 @@ from django.template import loader
 from django.views import generic
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Service
 from .models import Organization
