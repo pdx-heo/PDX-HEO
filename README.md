@@ -1,4 +1,9 @@
 # PDX-HEO
+
+MIT License
+Copyright (c) 2017 Mackenzie Wangenstein, Chitra Maruthavanan, Andy Mayer
+
+
 Portland Housing Emergency Outreach and Community Safety Web-app:
 
 The goal of this project is to provide resources for Portland residents that are experiencing or  are vulnerable to experiencing issues relating to homelessness .
