@@ -24,18 +24,18 @@
             });
 
             var script = document.createElement('script');
-            script.src = '/static/samplejson.js';
+            script.src = '/static/mapcoords.js';
             document.getElementsByTagName('head')[0].appendChild(script);
         }
 
         window.mapfeed_callback = function (results) {
-            for (var i = 0; i < results.features.length; i++) {
-                var coords = results.features[i].geometry.coordinates;
+            for (var geocoords = 0; geocoords < results.features.length; geocoords++) {
+                var coords = results.features[geocoords].geometry.coordinates;
                 var latLng = new google.maps.LatLng(coords[1], coords[0]);
                 var marker = new google.maps.Marker({
                     position: latLng,
                     map: map,
-                    title: results.features[i].geometry.address
+                    title: results.features[geocoords].geometry.address
                 });
             }
         }
