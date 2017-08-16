@@ -36,14 +36,6 @@ def about(request):
   return render(request, 'website/about.html')
 
 
-class FinderView(generic.ListView):
-  template_name = 'website/finder.html'
-  context_object_name = 'service_list'
-
-  def get_queryset(self):
-    return Service.objects.order_by('name')[:10]
-
-
 class OrganizationView(generic.DetailView):
   model = Organization
   template_name = 'website/organization.html'
@@ -52,3 +44,21 @@ class OrganizationView(generic.DetailView):
 class ServiceView(generic.DetailView):
   model = Service
   template_name = 'website/service.html'
+
+
+def finder(request):
+  service_list = Service.objects.order_by('name')
+  service_paginator = Paginator(service_list, 10)
+  organization_list = Organization.objects.order_by('name')
+  organization_paginator = Paginator(organization_list, 10)
+  page = request.GET.get('page')
+  try:
+    services = service_paginator.page(page)
+    organizations = organization_paginator.page(page)
+  except PageNotAnInteger:
+    services = service_paginator.page(1)
+    organizations = organization_paginator.page(1)
+  except EmptyPage:
+    services = service_paginator.page(service_paginator.num_pages)
+    organizations = organization_paginator.page(organization_paginator.num_pages)
+  return render(request, 'website/finder.html', {'page': page, 'services': services, 'organizations': organizations})
