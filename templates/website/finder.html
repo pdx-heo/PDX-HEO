@@ -3,13 +3,22 @@
 {% block title %}Service Finder{% endblock %}
 
 {% block content %}
-  <p>Welcome to the service finder</p>
+  <div class="pure-g">
+    <div class="pure-u-1-5"></div>
+    <div class="pure-u-3-5">
+      <h1 align="center">PDX Service Finder</h1>
+    </div>
+    <div class="pure-u-1-5"></div>
+  </div>
+
   <div class="pure-g">
     <div class="pure-u-1-5"></div>
     <div class="pure-u-1-5">
       <div class="pure-button-group" role="group">
         <button id="services_button" onclick="serviceSearch()" style="width: 50%" class="pure-button">Services</button>
-        <button id="organizations_button" onclick="organizationSearch()" style="width: 50%" class="pure-button">Organizations</button>
+        <button id="organizations_button" onclick="organizationSearch()" style="width: 50%" class="pure-button">
+          Organizations
+        </button>
       </div>
     </div>
     <div class="pure-u-1-5"></div>
@@ -24,8 +33,6 @@
     <div class="pure-u-1-5"></div>
     <div class="pure-u-1-5">
       <div class="pure-button-group" role="group">
-        <!-- TODO: only displays when Services is selected -->
-        <!-- TODO: active and primary change based on which is selected -->
         <button id="all_button" onclick="allSearch()" style="width: 25%" class="pure-button">All</button>
         <button id="shelters_button" onclick="shelterSearch()" style="width: 25%" class="pure-button">Shelters</button>
         <button id="food_button" onclick="foodSearch()" style="width: 25%" class="pure-button">Food</button>
@@ -38,7 +45,6 @@
   <div id="finder_table" class="pure-g">
     <div class="pure-u-1-5"></div>
     <div class="pure-u-3-5">
-      <!-- TODO: Change between organization and service -->
       <table id="finder_table" style="width: 100%" class="pure-table pure-table-bordered">
         <thead>
         <tr>
@@ -47,7 +53,6 @@
           <th>Address</th>
           <th>Contact</th>
           <th>Description</th>
-          <th>Amenities</th>
         </tr>
         </thead>
 
@@ -57,11 +62,20 @@
             <tr>
               <td><a href="{{ service.get_absolute_url }}">{{ service.name }}</a></td>
               <td>{{ service.type }}</td>
-              <td>{{ service.address }}</td>
-              <td><p>{{ service.phone }}</p>
-                <p>{{ service.email }}</p></td>
+              <td>
+                {% if service.address %}
+                <a href="http://maps.google.com/?q={{ service.address }}">{{ service.address }}</a>
+                {% endif %}
+              </td>
+              <td>
+                {% if service.phone %}
+                  <p>Phone: <a href="tel:{{ service.phone }}">{{ service.phone }}</a></p>
+                {% endif %}
+                {% if service.email %}
+                  <p>Email: <a href="mailto:{{ service.email }}">{{ service.email }}</a></p>
+                {% endif %}
+              </td>
               <td>{{ service.description }}</td>
-              <td></td>
             </tr>
           {% endfor %}
         {% endif %}
@@ -70,11 +84,20 @@
             <tr>
               <td><a href="{{ organization.get_absolute_url }}">{{ organization.name }}</a></td>
               <td>Organization</td>
-              <td>{{ organization.address }}</td>
-              <td><p>{{ organization.phone }}</p>
-                <p>{{ organization.email }}</p></td>
+              <td>
+                {% if organization.address %}
+                <a href="http://maps.google.com/?q={{ organization.address }}">{{ organization.address }}</a>
+                {% endif %}
+              </td>
+              <td>
+                {% if organization.phone %}
+                  <p>Phone: </p><a href="tel:{{ organization.phone }}">{{ organization.phone }}</a>
+                {% endif %}
+                {% if organization.email %}
+                  <p>Email: </p><a href="mailto:{{ organization.email }}">{{ organization.email }}</a>
+                {% endif %}
+              </td>
               <td>{{ organization.description }}</td>
-              <td></td>
             </tr>
           {% endfor %}
         {% endif %}
