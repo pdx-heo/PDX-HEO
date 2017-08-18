@@ -1,4 +1,4 @@
-Copyright (c) 2017 MackenzieWangenstein, Chitra Maruthavanan, Andrew Mayer
+Copyright (c) 2017 MackenzieWangenstein, Chitradevi Maruthavanan, Andrew Mayer
 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
