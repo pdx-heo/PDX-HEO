@@ -3,6 +3,7 @@
 MIT License
 Copyright (c) 2017 Mackenzie Wangenstein, Chitra Maruthavanan, Andy Mayer
 
+https://youtu.be/iWs0UgHW_rc
 
 Portland Housing Emergency Outreach and Community Safety Web-app:
 
