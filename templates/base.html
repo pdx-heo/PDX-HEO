@@ -1,3 +1,27 @@
+<!--
+MIT License
+Copyright (c) 2017 Mackenzie Wangenstein, Chitra Maruthavanan, Andy Mayer
+
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +35,8 @@
   {% load static %}
   {% load forum_tags %}
 
- <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZ\T9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
- <link rel="stylesheet" href="{% static 'website/pdxheo.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZ\T9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'website/pdxheo.css' %}">
 </head>
 
 <body>
@@ -22,12 +46,11 @@
   <div class="menu-custom pure-menu pure-menu-horizontal">
     <a href="/" class="pure-menu-heading link-custom-heading pure-menu-link">PDX-HEO</a>
     <ul class="pure-menu-list">
-        <li class="pure-menu-item"><a href="{% url 'finder' %}" class="link-custom pure-menu-link">Resource Finder</a></li>
-        <li class="pure-menu-item"><a href="{% url 'forum:index' %}" class="link-custom pure-menu-link">Community Board</a></li>
-        <li class="pure-menu-item"><a href="{% url 'testimonials' %}" class="link-custom pure-menu-link">Testimonials</a></li>
-        <li class="pure-menu-item"><a href="{% url 'safety_map' %}" class="link-custom pure-menu-link">Safety Map</a></li>
-        <li class="pure-menu-item"><a href="{% url 'about' %}" class="link-custom pure-menu-link">About</a></li>
-
+      <li class="pure-menu-item"><a href="{% url 'finder' %}" class="link-custom pure-menu-link">Resource Finder</a></li>
+      <li class="pure-menu-item"><a href="{% url 'forum:index' %}" class="link-custom pure-menu-link">Community Board</a></li>
+      <li class="pure-menu-item"><a href="{% url 'testimonials' %}" class="link-custom pure-menu-link">Testimonials</a></li>
+      <li class="pure-menu-item"><a href="{% url 'safety_map' %}" class="link-custom pure-menu-link">Safety Map</a></li>
+      <li class="pure-menu-item"><a href="{% url 'about' %}" class="link-custom pure-menu-link">About</a></li>
     </ul>
   </div>
 
