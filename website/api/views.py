@@ -1,36 +1,76 @@
-from website.models import Organization, Service
-from .serializers import OrganizationSerializer, ServiceSerializer
-from rest_framework import generics
+from website.models import Organization, Service, Testimony
+from .serializers import OrganizationSerializer, ServiceSerializer, UserSerializer, TestimonySerializer
+from .permissions import IsOwnerOrReadOnly
+from rest_framework import generics, permissions, viewsets
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse_lazy
+
+from django.contrib.auth.models import User #TODO - change to user in project when re-introduced
+import views
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'services': reverse_lazy('api:service-list', request=request, format=format),
+        'organizations': reverse_lazy('api:organization-list', request=request, format=format),
+        'testimonials': reverse_lazy('api:testimonials_list', request=request, format=format)
+    })
 
 
-class OrganizationDetail(generics.RetrieveUpdateDestroyAPIView):
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class OrganizationViewSet(viewsets.ModelViewSet):
   """
-    Create get,post, put, delete organization
+  This viewset automatically provides `list`, `create`, `retrieve`,
+  `update` and `destroy` actions.
   """
   queryset = Organization.objects.all()
   serializer_class = OrganizationSerializer
+  permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
 
+  def perform_create(self, serializer):
+      serializer.save(creator=self.request.user)
 
-class OrganizationList(generics.ListCreateAPIView):
-
+class TestimonyViewSet(viewsets.ModelViewSet):
   """
-  List all organizations or create a new organization
+  This viewset automatically provides `list`, `create`, `retrieve`,
+  `update` and `destroy` actions.
   """
-  queryset = Organization.objects.all()
-  serializer_class = OrganizationSerializer
+  queryset = Testimony.objects.all()
+  serializer_class = TestimonySerializer
+  permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+  def perform_create(self, serializer):
+      serializer.save(creator=self.request.user)
 
 
-class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
+
+class ServiceViewSet(viewsets.ModelViewSet):
     """
-      Create get,post, put, delete organization
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
     """
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
 
 
-class ServiceList(generics.ListCreateAPIView):
+class TestimonyViewSet(viewsets.ModelViewSet):
     """
-    List all organizations or create a new organization
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
     """
-    queryset = Service.objects.all()
-    serializer_class = ServiceSerializer
+    queryset = Testimony.objects.all()
+    serializer_class = TestimonySerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
