@@ -1,7 +1,7 @@
 # PDX-HEO
 
 MIT License
-Copyright (c) 2017 Mackenzie Wangenstein, Chitra Maruthavanan, Andy Mayer
+Copyright (c) 2017 Mackenzie Wangenstein, Chitradevi Maruthavanan, Andy Mayer
 
 https://youtu.be/iWs0UgHW_rc
 

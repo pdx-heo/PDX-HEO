@@ -16,7 +16,7 @@ Including another URLconf
 
 """
 MIT License
-Copyright (c) 2017 Mackenzie Wangenstein, Chitra Maruthavanan, Andy Mayer
+Copyright (c) 2017 Mackenzie Wangenstein, Chitradevi Maruthavanan, Andy Mayer
 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
