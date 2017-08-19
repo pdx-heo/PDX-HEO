@@ -103,3 +103,9 @@ Week 3 Report:
        - Challenges:
            - Project Management: We found it challenging to create an assign issues for the beginning of the project while we were trying to set up the base structure of the application because we were all new to building a web app and using the django framework. Now that we have the database setup and the structure inplace to create webviews, it has been easier to come up with ideas of the work that needs to be done.
 	   - Project structure/organization challenges need to addressed because of naming conventions used when first drafting the project.
+	   
+	   
+	 requirments:
+	 this project used django and python 2.7.
+	 
+	library dependencies are listed in the requirments file. this project is set up to be eadily ran wih docker containers. to use, download the source code,  docker and docker compose. navigate to the directory with the docker file.  run the command 'docker-compose build' followed by 'docker-compose up'
